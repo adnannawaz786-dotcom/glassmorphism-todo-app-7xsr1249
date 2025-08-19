@@ -1,0 +1,206 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Custom CSS Variables */
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  --glass-backdrop: blur(8px);
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --gradient-tertiary: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--gradient-primary);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Glassmorphism Utilities */
+.glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+}
+
+.glass-card {
+  @apply glass rounded-xl p-6;
+}
+
+.glass-button {
+  @apply glass rounded-lg px-4 py-2 transition-all duration-300 hover:bg-white/20 active:scale-95;
+}
+
+.glass-input {
+  @apply glass rounded-lg px-4 py-3 bg-white/10 border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-transparent;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Animation Utilities */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out;
+}
+
+.animate-bounce-in {
+  animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Focus Styles */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-transparent;
+}
+
+/* Todo Specific Styles */
+.todo-item {
+  @apply glass-card mb-4 transition-all duration-300 hover:transform hover:scale-[1.02] hover:shadow-lg;
+}
+
+.todo-item.completed {
+  @apply opacity-75;
+}
+
+.todo-checkbox {
+  @apply w-5 h-5 rounded border-2 border-white/30 bg-transparent checked:bg-white/20 checked:border-white/50 focus:ring-2 focus:ring-white/30 focus:ring-offset-0;
+}
+
+.todo-text {
+  @apply text-white/90 flex-1 mx-3;
+}
+
+.todo-text.completed {
+  @apply line-through text-white/60;
+}
+
+.delete-button {
+  @apply text-red-300 hover:text-red-200 transition-colors duration-200 p-1 rounded hover:bg-red-500/20;
+}
+
+/* Priority Colors */
+.priority-high {
+  @apply border-l-4 border-red-400;
+}
+
+.priority-medium {
+  @apply border-l-4 border-yellow-400;
+}
+
+.priority-low {
+  @apply border-l-4 border-green-400;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .glass-card {
+    @apply p-4;
+  }
+  
+  body {
+    font-size: 14px;
+  }
+}
+
+/* Loading Animation */
+.loading-spinner {
+  @apply inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin;
+}
+
+/* Empty State */
+.empty-state {
+  @apply text-center py-12 text-white/60;
+}
+
+/* Floating Action Button */
+.fab {
+  @apply fixed bottom-6 right-6 w-14 h-14 rounded-full glass flex items-center justify-center text-white shadow-lg hover:scale-110 transition-transform duration-200;
+}
